@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add New User</title>
+    {% load staticfiles %}
+    <link href="{% static 'user_dashboard/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'user_dashboard/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'user_dashboard/css/starter-template.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'user_dashboard:index' %}">Dashboard App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'user_dashboard:dashboard' %}">Home</a></li>
+            <li><a href="{% url 'user_dashboard:about' %}">About</a></li>
+            <li class="active"><a href="{% url 'user_dashboard:new' %}">Add User</a></li>
+            <li><a href="{% url 'user_dashboard:show' id=request.session.user_id %}">View Profile</a></li>
+            <li><a href="{% url 'user_dashboard:edit' id=request.session.user_id%}">Edit Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'login_registration:logout' %}">Log Out <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="jumbotron">
+        <div class="page-header">
+          <h3>Add New User</h3>
+        </div>
+        <form class="form-horizontal" action="{% url 'login_registration:register' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="col-sm-2 control-label">First Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="first_name" class="form-control" id="inputEmail3" placeholder="First Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-10">
+              <input type="text" name="last_name" class="form-control" id="inputEmail3" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Confirm Password</label>
+            <div class="col-sm-10">
+              <input type="password" name="confirm_password" class="form-control" id="inputPassword3" placeholder="Confirm Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Add User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="errors">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+              <strong>Uh oh!</strong> {{message}}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'user_dashboard/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

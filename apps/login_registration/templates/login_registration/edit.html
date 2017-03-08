@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome Page</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/style.css' %}">
+  </head>
+  <body>
+    <div class="page_top">
+      <h3>Login and Registration App</h3>
+      <a href="{% url 'login_registration:show' %}">Home</a>
+      <a href="{% url 'login_registration:logout' %}">Log Out</a>
+    </div>
+    <div class="update">
+      <h2>Edit Profile</h2>
+      <form action="{% url 'login_registration:update' %}" method="post">
+        {% csrf_token %}
+        <label>First Name: </label><input type="text" name="first_name" value="{{user.first_name}}">
+        <label>Last Name: </label><input type="text" name="last_name" value="{{user.last_name}}">
+        <label>Email: </label><input type="text" name="email" value="{{user.email}}">
+        <label>Password: </label><input type="text" name="password">
+        <label>Confirm Password: </label><input type="text" name="confirm_password">
+        <input type="submit" value="Save Changes">
+      </form>
+    </div>
+    <div class="errors">
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{message}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

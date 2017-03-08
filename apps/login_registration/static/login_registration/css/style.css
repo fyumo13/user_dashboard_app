@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+  padding-left: 10px;
+}
+
+form {
+  display: inline-block;
+  padding: 10px;
+  width: 95%;
+}
+
+label {
+  display: block;
+  margin: 5px 0;
+}
+
+input[type="text"] {
+  padding: 5px 10px;
+  width: 90%;
+}
+
+input[type="submit"] {
+  margin: 10px 0;
+}
+
+.page_top {
+  background-color: rgb(171, 198, 212);
+  box-shadow: 0 1px 2px;
+  display: block;
+}
+  .page_top h3 {
+    display: inline-block;
+    margin: 10px;
+  }
+  .page_top a {
+    font-size: 0.85em;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin-left: 5px;
+  }
+
+.wrapper {
+  display: block;
+  width: 1000px;
+  height: 300px;
+}
+
+.errors {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+}
+
+.register, .login, .update, .users {
+  display: inline-block;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px;
+  margin: 10px;
+}
+
+.register, .login, .errors {
+  width: 33.3%;
+}
+
+.register h2, .login h2, .update h2 {
+  border-bottom: 1px solid black;
+  padding: 5px;
+}
+
+.register {
+  background-color: rgb(40, 164, 207);
+}
+  .register h1 {
+    background-color: rgb(40, 140, 186);
+  }
+
+.login {
+  background-color: rgb(219, 104, 95);
+  vertical-align: top;
+}
+  .login h1 {
+    background-color: rgb(255, 104, 81);
+  }
+
+.update {
+  background-color: rgb(138, 225, 140);
+  width: 300px;
+}
+  .update h1 {
+    background-color: rgb(121, 244, 188);
+  }
+  .update input[type="submit"] {
+    display: block;
+  }
+
+  .users thead {
+    font-weight: bold;
+  }
+  .users tbody {
+    font-size: 0.85em;
+  }
+  .users td {
+    padding: 5px;
+  }

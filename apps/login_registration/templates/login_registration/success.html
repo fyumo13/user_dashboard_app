@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome Page</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login_registration/css/style.css' %}">
+  </head>
+  <body>
+    <div class="page_top">
+      <h3>Login and Registration App</h3>
+      <a href="{% url 'login_registration:edit' id=request.session.user_id %}">Edit Profile</a>
+      <a href="{% url 'login_registration:logout' %}">Log Out</a>
+    </div>
+    {% if users %}
+    <table class="users">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Created At</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.created_at}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    <div class="errors">
+      {% if messages %}
+      {% for message in messages %}
+      <p>{{message}}</p>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

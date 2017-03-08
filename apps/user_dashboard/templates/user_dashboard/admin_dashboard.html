@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    {% load staticfiles %}
+    <link href="{% static 'user_dashboard/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'user_dashboard/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'user_dashboard/css/starter-template.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'user_dashboard:index' %}">Dashboard App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'user_dashboard:dashboard' %}">Home</a></li>
+            <li><a href="{% url 'user_dashboard:about' %}">About</a></li>
+            <li><a href="{% url 'user_dashboard:new' %}">Add User</a></li>
+            <li><a href="{% url 'user_dashboard:show' id=request.session.user_id %}">View Profile</a></li>
+            <li><a href="{% url 'user_dashboard:edit' id=request.session.user_id%}">Edit Profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'login_registration:logout' %}">Log Out <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="page-header">
+        <h3>Manage Users</h3>
+        <a class="btn btn-default" href="{% url 'user_dashboard:new' %}" role="button">Add New User</a>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>User Level</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        {% if users %}
+          <tbody>
+            {% for user in users %}
+              <tr>
+                <td>{{user.id}}</td>
+                <td><a href="{% url 'user_dashboard:show' id=user.id %}">{{user.first_name}} {{user.last_name}}</a></td>
+                <td>{{user.email}}</td>
+                <td>{{user.created_at}}</td>
+                {% if user.user_level == 9 %}
+                  <td>Admin</td>
+                {% else %}
+                  <td>Normal</td>
+                {% endif %}
+                <td>
+                  <a href="{% url 'user_dashboard:edit' id=user.id %}">Edit</a>
+                  <a href="{% url 'login_registration:destroy' id=user.id %}">Remove</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        {% endif %}
+      </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'user_dashboard/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
